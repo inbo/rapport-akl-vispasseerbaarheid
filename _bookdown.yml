@@ -1,0 +1,17 @@
+book_filename: "balgerhoeke_2024.Rmd"
+output_dir: "./output"
+delete_merged_file: TRUE
+language:
+  label:
+    fig:    'Figuur '
+    tab:    'Tabel '
+    eq:     'Vergelijking '
+    thm:    'Theorema '
+    lem:    'Lemma '
+    def:    'Definitie '
+    cor:    'Gevolgtrekking '
+    prp:    'Bewering '
+    ex:     'Voorbeeld '
+    proof:  'Bewijs. '
+    remark: 'Opmerking. '
+edit: https://github.com/spbruneel-INBO/Rapport_Balgerhoeke_INBO_2024/edit/main/%s
