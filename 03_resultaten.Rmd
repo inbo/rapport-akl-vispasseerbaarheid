@@ -1,1 +1,20 @@
 # Resultaten
+
+```{r include=FALSE}
+source("./code/not_functions/libraries.R")
+source("./code/functions/f.read_excel_allsheets.R")
+source("./code/functions/f.dominant.species.R")
+source("./code/functions/f.transformation.R")
+source("./code/functions/f.dispersie.R")
+source("./code/functions/f.pairwise.adonis.R")
+source("./code/functions/f.plot.habitat.spatial.R")
+```
+
+```{r}
+data<-f.read_excel_allsheets("./data/extern/verwerkt_in_excel/data balgerhoeke 2023.xlsx")
+afkortingen<-data[[1]]
+data[[1]]<-NULL
+data<-rbindlist(data)
+colnames(data)<-make.names(colnames(data))
+```
+
