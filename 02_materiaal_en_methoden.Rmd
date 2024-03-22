@@ -1,1 +1,40 @@
 # Materiaal en methoden
+
+Vissen ondernemen tijdens de voortplantingsperiode meestal massaal gerichte stroomopwaartse migraties gedurende een korte periode. Als gevolg van deze massale voortplantingsmigraties kunnen er zich belangrijke concentraties van vissen voordoen stroomafwaarts van barrières, wat normaal grotere vangsten in de opgestelde fuiken tot gevolg heeft. Om de migraties van alle vissoorten nauwkeurig te bestuderen zou men praktisch wekelijks moeten vissen. In het kader van dit onderzoek is dergelijke arbeidsintensieve aanpak niet aangewezen en wordt ervoor gekozen om te focussen op de voortplantingsmigratie van de meest voorkomende karperachtigen in april en mei in het AKL, o.a. blankvoorn, kolblei en brasem en op de stroomopwaartse migratie van jonge paling (glasaal, elvers en gele paling) in juni, juli en augustus \@ref(fig:migratieperiode).
+
+Op basis van de onderzoeken naar de vispasseerbaarheid van de sluisstuwcomplexen op de Ringvaart in Evergem en Merelbeke (Buysse et al. 2002 & 2003) werd voor het nagaan van de migratieroutes en vispasseerbaarheid van de sluisstuwcomplexen van Balgerhoeke en Schipdonk gekozen voor een onderzoek met verschillende vangstmethoden. Uit bovenvermelde studies blijkt dat vissen zich concentreren onder kunstwerken die niet vispasseerbaar zijn. De methodiek berust op het principe van het gericht seizoenaal en temporeel monitoren van vissen net stroomafwaarts van kunstwerken zoals sluizen, stuwen en sifons. Om de pakkans te verhogen werd ervoor gekozen om verschillende vangsttechnieken aan te wenden. Doortrekkende karperachtigen, gele paling en andere vissoorten werden gevangen met behulp van dubbele schietfuiken en hokfuiken. Doortrekkende glasalen en elvers werden gemonitord met behulp van palinggoten en artificiële substraten (‘flottangs’).
+
+```{r migratieperiode, fig.cap = "Beperkt overzicht van de migratieperiode van de meest voorkomende soorten in de streek", fig.show = "hold", out.width = "100%", fig.align = "default"}
+include_graphics(path = "./media/migratieperiode.png")
+```
+
+## Studieperiode en meetfrequentie
+
+Het veldwerk liep van maandag 20/03/2023 tot en met donderdag 25/05/2023. Substraten, glasaalgoten en fuiken werden geleegd en opnieuw geplaatst om de 1 tot 3 dagen.
+
+## Werkwijze
+
+### Jonge paling
+
+Om jonge paling te bemonsteren werd gebruik gemaakt van glasaalgoten en substraten. Glasaalgoten werden geïnstalleerd te Balgerhoeke en aan de monding van de Ede. Substraten werden geplaatst aan de monding van de Ede, aan het RWZI stroomafwaarts van Balgerhoeke, aan Balgerhoeke zelf en aan Schipdonk. Deze zijn op onderstaande figuren (Figuur \@ref(fig:maps)) aangeduid met rode ruitjes.
+
+```{r maps, fig.cap = "Studiegebied (links Balgerhoeke; rechts Schipdonk) met aanduiding van de locaties van de substraten (rode ruitjes), fuiken (gele sterren) en glasaalgoot (oranje streepje). ", fig.show = "hold", out.width = "50%", fig.align = "default"}
+include_graphics(path = c("./media/balgerhoeke.png",
+                          "./media/schipdonk.png"))
+```
+
+De substraten werden onderaan voorzien van een fijnmazig net zodat de kans op ontsnappen bij het opheffen van de substraten minimaal was. Zowel de opvangbak van de glasaalgoot als de substraten werden geleegd op de oevers. Bij het legen van de substraten werd vijf keer hard geschud boven het opvangnet. De gevangen individuen werden verdoofd met kruidnagelolie en gemeten (lengte en gewicht). In tegenstelling tot de fuikvangsten werden de vangsten van de glasaalgoten en de substraten niet voorzien van een vinkip als merkteken (zie verder). De vangsten van zowel de goten als de substraten werden uitgezet stroomopwaarts van Schipdonk (ie Kanaal Gent-Oostende).
+
+Bij het bepalen van de lengtefrequenties werden enkel vissen beschouwd waarvan lengtemetingen voorhanden waren (indien er meer dan 50 vissen waren van een bepaalde soort werd de surplus enkel geteld en niet gemeten). Aantallen en gemiddelde lengte werden uitgezet in functie van de tijd.
+
+### Fuikvangsten
+
+Waar mogelijk werden schietfuiken gebruikt. Ter hoogte van Balgerhoeke was het water echter te ondiep en daarom werden hokfuiken gebruikt voor deze specifieke locatie. De locaties van de fuiken worden weergegeven in Figuur \@ref(fig:maps) als gele sterren. De gevangen individuen werden verdoofd met kruidnagelolie, gemeten (lengte) en gemerkt adhv een knip aan buikvin. Na het meten en merken werden de vissen stroomafwaarts van het knelpunt uitgezet. De vangst van de verschillende fuiken op een bepaalde dag op een bepaalde site (i.e Balgerhoeke of Schipdonk) worden samen als één staal beschouwd.
+
+De gemeenschapsstructuur werd onderzocht in functie van ruimte en tijd mbv
+
+-   Tabellen die aantallen per soort weergegeven per locatie en datum
+
+-   PERMANOVA analyse met als factoren de datum, site (Balgerhoeke versus Schipdonk) en locatie binnen de site (Bray-Curtis dissimilariteit van de door de vierde machtswortel getransformeerde aantallen per soort).
+
+Bij het bepalen van de lengtefrequenties werden enkel vissen beschouwd waarvan lengtemetingen voorhanden waren (indien er meer dan 50 vissen waren van een bepaalde soort werd de surplus enkel geteld en niet gemeten). Het aandeel hervangst en vissen met paaikenmerken werd uitgezet in functie van de tijd.
