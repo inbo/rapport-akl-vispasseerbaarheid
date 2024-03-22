@@ -8,14 +8,17 @@ source("./code/functions/f.transformation.R")
 source("./code/functions/f.dispersie.R")
 source("./code/functions/f.pairwise.adonis.R")
 source("./code/functions/f.plot.habitat.spatial.R")
+source("./code/functions/f.map.R")
 ```
 
 ## Abiotiek
 
+Een overzicht van de tijdsreeksen van relevante meetstations voor het studiegebied is gegeven in Figuur \@ref(fig:tijdsreeksen). Een overzicht van de locaties is beschikbaar via deze [link](http://rpubs.com/spbruneel-INBO/maps_bal_schip).
+
 ```{r}
-files<-list.files(path="./data/abiotiek/extern/",pattern = ".csv")
+files<-list.files(path="./data/abiotiek/extern/metingen/",pattern = ".csv")
 for (i in 1:length(files)){
-  path<-paste0("./data/abiotiek/extern/",files[i])
+  path<-paste0("./data/abiotiek/extern/metingen/",files[i])
   file_name<-gsub(".csv","",files[i])
   temp<-read.csv(path,sep=';',skip=7)[,1:2]
   colnames(temp)<-c("date","value")
@@ -29,15 +32,25 @@ for (i in 1:length(files)){
 data$date=substr(gsub("T", " ", as.character(data$date)),1,19)
 data$date_brussels = as.POSIXct(data$date,format='%Y-%m-%d %H:%M:%S',tz="Europe/Brussels")
 data$date_utc = data$date_brussels; attr(data$date_utc, "tzone") <- "GMT"
+
+remove(files,path,file_name,temp)
 ```
 
-```{r fig.height=10, fig.width=10}
+```{r tijdsreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van afvoer (m³/s), waterpeil (m) en temperatuur (°C) voor relevante meetstations doorheen de tijd. Rode lijnen begrenzen de studieperiode."}
+date_range <- which(data$date_utc %in% as.Date(c("2023-03-22", "2023-05-25")) )
+
 ggplot(data, aes(x = date_utc, y = value)) + 
   geom_line() +
   xlab("Datum") + ylab("Waarde") +
-  facet_wrap(~ var + loc + regio,scales="free_y",labeller = label_wrap_gen(multi_line=FALSE)) + 
+  facet_wrap(~ var + loc,scales="free_y") + 
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
-  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "1 month")
+  geom_vline(xintercept = as.numeric(data$date_utc[date_range]),color = "red", size = 1) +
+  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "1 month") 
+```
+
+```{r eval=FALSE}
+coordinaten<-read.csv("./data/abiotiek/extern/coordinaten/coordinaten_waterinfo.csv",sep=";")
+f.map(coordinaten,"x.coordinaat","y.coordinaat",crs="+init=epsg:31370","Stationsnaam","Data.eigenaar")
 ```
 
 ## Vissen
@@ -48,11 +61,14 @@ afkortingen<-vis[[1]]
 vis[[1]]<-NULL
 vis<-rbindlist(vis)
 colnames(vis)<-make.names(colnames(vis))
+
 vis$Taxon.aantal[which(is.na(vis$Taxon.aantal)==TRUE)]=1
 vis$Taxon.naam<-tolower(vis$Taxon.naam)
+vis$Methode<-tolower(vis$Methode)
 vis$gemerkt<-tolower(vis$gemerkt)
 vis$gemerkt[which(is.na(vis$gemerkt)==TRUE)]="n"
 vis<-vis[-which(is.na(vis$Taxon.naam)==TRUE | vis$Taxon.naam %in% c("chinese wolhandkrab","rode amerikaanse rivierkreeft")),]
+
 vis$plaats<-substr(vis$Meetplaatscode,1,3)
 vis$plaats[which(vis$plaats=="mer")]="Schipdonk"
 vis$plaats[which(vis$plaats=="bal")]="Balgerhoeke"
@@ -61,20 +77,39 @@ vis$maand<-format(vis$Datum,"%m-%Y")
 vis <- vis %>% 
   group_by(plaats,maand,Taxon.naam) %>%
   mutate(mediaan.lengte=median(Taxon.lengte,na.rm=TRUE))
-vis$Taxon.lengte[which(is.na(vis$Taxon.lengte)==TRUE)]<-vis$mediaan.lengte[which(is.na(vis$Taxon.lengte)==TRUE)]
+vis$Taxon.lengte.imputatie<-vis$Taxon.lengte
+vis$Taxon.lengte.imputatie[which(is.na(vis$Taxon.lengte)==TRUE)]<-vis$mediaan.lengte[which(is.na(vis$Taxon.lengte)==TRUE)]
 
 vis.soorten<-as.data.frame(unique(vis$Taxon.naam))
 colnames(vis.soorten)="Taxon.naam"
 vis.soorten<-t(vis.soorten)
 colnames(vis.soorten)<-vis.soorten
 
-vis.schietfuik<-vis[which(vis$Methode=="Schietfuik"),]
+vis.fuik<-vis[which(vis$Methode=="schietfuik" | vis$Methode=="hokfuik"),]
+vis.fuik$reproductie<-"nee"
+vis.fuik$reproductie[which(vis.fuik$Meting.commentaar %in% c("eieren","eitjes","eitjes?","eitjs"))]="ja"
+vis.fuik$reproductie[which(vis.fuik$Meting.commentaar %in% c("hom","h","hom, paaiuitslag","paaiuitslag/hom","paaiuitslag + hom"))]="ja"
+
+vis.goot<-vis[which(vis$Methode=="palinggoot"),]
+
+vis.substraat<-vis[which(vis$Methode=="substraat"),]
+vis.substraat<-vis.substraat[-which(vis.substraat$Taxon.naam!="paling"),]
 ```
 
-### Schietfuiken
+### Data-overzicht
 
 ```{r}
-vis.breed <- vis.schietfuik %>% 
+table(vis$Meetplaatscode,vis$Methode) %>% kable(caption="Methode versus meetplaats")
+```
+
+```{r}
+table(vis$Datum,vis$Meetplaatscode) %>% kable(caption="Methode versus meetplaats")
+```
+
+### Fuiken
+
+```{r}
+vis.breed <- vis.fuik %>% 
   dplyr::select(plaats,Methode,Meetplaatscode,maand,Datum,Taxon.naam,Taxon.aantal) %>% 
   group_by(plaats,Methode,Meetplaatscode,maand,Datum,Taxon.naam) %>% 
   summarise(Taxon.aantal=sum(Taxon.aantal,na.rm=TRUE)) %>% 
@@ -88,24 +123,24 @@ vis.breed <- vis.schietfuik %>%
 
 ```{r include=TRUE}
 options(knitr.kable.NA = 0)
-vis.schietfuik %>% dplyr::filter(plaats %in% c("Balgerhoeke")) %>% group_by(maand,Taxon.naam) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale aantallen per vissoort en per maand voor Balgerhoeke")
+vis.fuik %>% dplyr::filter(plaats %in% c("Balgerhoeke")) %>% group_by(maand,Taxon.naam) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale aantallen per vissoort en per maand voor Balgerhoeke")
 ```
 
 ```{r include=TRUE}
 options(knitr.kable.NA = 0)
-vis.schietfuik %>% dplyr::filter(plaats %in% c("Schipdonk")) %>% group_by(maand,Taxon.naam) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale aantallen per vissoort en per maand voor Schipdonk")
+vis.fuik %>% dplyr::filter(plaats %in% c("Schipdonk")) %>% group_by(maand,Taxon.naam) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale aantallen per vissoort en per maand voor Schipdonk")
 ```
 
 ```{r include=TRUE}
 options(knitr.kable.NA = 0)
-vis.schietfuik %>% group_by(plaats,Taxon.naam) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(plaats), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale aantallen per vissoort over de hele periode voor Schipdonk en Balgerhoeke")
+vis.fuik %>% group_by(plaats,Taxon.naam) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(plaats), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale aantallen per vissoort over de hele periode voor Schipdonk en Balgerhoeke")
 ```
 
 ```{r message=FALSE}
-domvis<-f.dominant.species(vis.schietfuik,0.1)
+domvis<-f.dominant.species(vis.fuik,0.05)
 ```
 
-```{r vis-barplot-absoluut, fig.cap ="Verdeling van de biomassa aan gevangen vissen per vissoort in de Balgerhoeke (rest = overige vissoorten)."}
+```{r vis-barplot-absoluut, fig.cap ="Verdeling van de fuikvangsten per vissoort in Balgerhoeke (rest = overige vissoorten die elk minder dan 5% van de vangsten uitmaken)."}
 ggplot(domvis, aes(fill=Taxon.naam, y=Taxon.aantal, x=maand)) + geom_bar(position="stack", stat="identity") + facet_wrap(~plaats)
 ```
 
@@ -114,15 +149,15 @@ vis.mat<-f.transformatie(vis.breed,"4root")
 vis.dist=vegdist(vis.mat, method="bray",binary=FALSE,diag = TRUE)
 ```
 
-```{r fig.height=10, fig.width=10}
+```{r include=FALSE, fig.height=10, fig.width=10}
 f.dispersie(vis.breed,"maand")
 ```
 
-```{r fig.height=10, fig.width=10}
+```{r include=FALSE, fig.height=10, fig.width=10}
 f.dispersie(vis.breed,"plaats")
 ```
 
-```{r fig.height=10, fig.width=10}
+```{r include=FALSE, fig.height=10, fig.width=10}
 f.dispersie(vis.breed,"Meetplaatscode")
 ```
 
@@ -132,8 +167,8 @@ adonis2(vis.dist ~ maand * plaats + Meetplaatscode %in% plaats, data=vis.breed)
 
 #### Lengteverdeling
 
-```{r fig.height=10, fig.width=10}
-ggplot(vis.schietfuik, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
+```{r fig.height=10, fig.width=10, fig.cap="Lengteverdeling voor de verschillende gevangen soorten voor de hele studieperiode."}
+ggplot(vis.fuik, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() +
   facet_wrap(~ Taxon.naam, scales="free", labeller = label_wrap_gen(multi_line=FALSE))
 ```
@@ -141,7 +176,7 @@ ggplot(vis.schietfuik, aes(x = Taxon.lengte, weight = Taxon.aantal)) +
 #### Hervangst
 
 ```{r}
-hervangst <- vis.schietfuik %>% 
+hervangst <- vis.fuik %>% 
   dplyr::select(plaats,maand,Datum,Taxon.naam,gemerkt,Taxon.aantal) %>%
   group_by(plaats,maand,Datum,Taxon.naam,gemerkt) %>%
   summarize(aantal=sum(Taxon.aantal)) %>% 
@@ -154,7 +189,7 @@ hervangst <- vis.schietfuik %>%
          aandeel=aantal/totaal.aantal) 
 ```
 
-```{r fig.height=10, fig.width=10}
+```{r fig.height=10, fig.width=10, fig.cap="Aandeel hervangst op totale fuikvangst per soort. De grootte van de punten weerspiegeld de totale vangst per soort."}
 ggplot(hervangst[which(hervangst$plaats=="Balgerhoeke" & hervangst$gemerkt=="j" & is.nan(hervangst$aandeel)==FALSE),], aes(x = Datum, y = aandeel)) + 
   geom_point(aes(size=(totaal.aantal)),alpha=0.3) +
   xlab("Datum") + ylab("Waarde") +
@@ -163,11 +198,102 @@ ggplot(hervangst[which(hervangst$plaats=="Balgerhoeke" & hervangst$gemerkt=="j" 
   scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "15 days")
 ```
 
-```{r fig.height=10, fig.width=10}
-ggplot(hervangst[which(hervangst$plaats=="Schipdonk" & hervangst$gemerkt=="j" & is.nan(hervangst$aandeel)==FALSE),], aes(x = Datum, y = aandeel)) + 
+#### Reproductie
+
+```{r}
+reproductie <- vis.fuik %>% 
+  dplyr::select(plaats,maand,Datum,Taxon.naam,reproductie,Taxon.aantal) %>%
+  group_by(plaats,maand,Datum,Taxon.naam,reproductie) %>%
+  summarize(aantal=sum(Taxon.aantal)) %>% 
+  ungroup() %>% 
+  complete(plaats,maand,Datum,Taxon.naam,reproductie) %>% 
+  replace(is.na(.), 0) %>% 
+  ungroup() %>%
+  group_by(plaats,maand,Datum,Taxon.naam) %>% 
+  mutate(totaal.aantal=sum(aantal),
+         aandeel=aantal/totaal.aantal) 
+```
+
+```{r fig.height=10, fig.width=10, fig.cap="Aandeel vissen met paaikenmerken op totale fuikvangst per soort. De grootte van de punten weerspiegeld de totale vangst per soort."}
+ggplot(reproductie[which(reproductie$plaats=="Balgerhoeke" & reproductie$reproductie=="ja" & is.nan(reproductie$aandeel)==FALSE),], aes(x = Datum, y = aandeel)) + 
   geom_point(aes(size=(totaal.aantal)),alpha=0.3) +
   xlab("Datum") + ylab("Waarde") +
   facet_wrap(~ Taxon.naam, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE)) + 
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
   scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "15 days")
+```
+
+```{r}
+reproductie.en.gemerkt <- vis.fuik %>% 
+  dplyr::select(plaats,maand,Datum,Taxon.naam,reproductie,gemerkt,Taxon.aantal) %>%
+  group_by(plaats,maand,Datum,Taxon.naam,reproductie,gemerkt) %>%
+  summarize(aantal=sum(Taxon.aantal)) %>% 
+  ungroup() %>% 
+  complete(plaats,maand,Datum,Taxon.naam,reproductie,gemerkt) %>% 
+  replace(is.na(.), 0) %>% 
+  ungroup() %>%
+  group_by(plaats,maand,Datum,Taxon.naam) %>% 
+  mutate(totaal.aantal=sum(aantal),
+         aandeel=aantal/totaal.aantal) 
+```
+
+```{r fig.height=10, fig.width=10, fig.cap="Aandeel gemerkte vissen met paaikenmerken op totale fuikvangst per soort. De grootte van de punten weerspiegeld de totale vangst per soort."}
+reproductie.en.gemerkt.subset<-reproductie.en.gemerkt[which(reproductie.en.gemerkt$plaats=="Balgerhoeke" &
+                                                              reproductie.en.gemerkt$reproductie=="ja" &
+                                                              reproductie.en.gemerkt$gemerkt=="j" &
+                                                              is.nan(reproductie.en.gemerkt$aandeel)==FALSE),]
+ggplot(reproductie.en.gemerkt.subset, aes(x = Datum, y = aandeel)) + 
+  geom_point(aes(size=(totaal.aantal)),alpha=0.3) +
+  xlab("Datum") + ylab("Waarde") +
+  facet_wrap(~ Taxon.naam, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE)) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
+  scale_x_datetime(date_labels = "%d-%m-%Y", date_breaks = "15 days")
+```
+
+### Glasaalgoot
+
+#### Lengteverdeling
+
+```{r fig.height=10, fig.width=10, fig.cap="Lengteverdeling van glasaal gevangen met de glasaalgoot in Balgerhoeke voor de hele studieperiode."}
+ggplot(vis.goot, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
+  geom_histogram()
+```
+
+```{r fig.height=10, fig.width=10, fig.cap="Lengteverdeling van glasaal gevangen met de glasaalgoot in Balgerhoeke voor de drie verschillende maanden van de studieperiode."}
+ggplot(vis.goot, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
+  geom_histogram() + 
+  facet_wrap(~ maand, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE))
+```
+
+```{r fig.cap="Lengte van glasaal gevangen met de glasaalgoot in Balgerhoeke in functie van de tijd."}
+ggplot(vis.goot, aes(x = Datum, y = Taxon.lengte)) + 
+  geom_point() + geom_smooth()
+```
+
+```{r fig.cap="Aantal glasaal gevangen met de glasaalgoot in Balgerhoeke in functie van de tijd."}
+ggplot(vis.goot %>% group_by(Datum) %>% summarize(aantal=sum(Taxon.aantal)),aes(x = Datum, y = aantal)) + geom_point() + geom_smooth()
+```
+
+### Substraat
+
+#### Lengteverdeling
+
+```{r fig.cap="Lengteverdeling van glasaal gevangen met substraten in Balgerhoeke voor de hele studieperiode."}
+ggplot(vis.substraat, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
+  geom_histogram()
+```
+
+```{r fig.cap="Lengteverdeling van glasaal gevangen met substraten in Balgerhoeke voor de drie verschillende maanden van de studieperiode."}
+ggplot(vis.substraat, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
+  geom_histogram() + 
+  facet_wrap(~ maand, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE))
+```
+
+```{r fig.cap="Lengte van glasaal gevangen met substraten in Balgerhoeke in functie van de tijd."}
+ggplot(vis.substraat, aes(x = Datum, y = Taxon.lengte)) + 
+  geom_point() + geom_smooth()
+```
+
+```{r fig.cap="Aantal glasaal gevangen met de substraten in Balgerhoeke in functie van de tijd."}
+ggplot(vis.substraat %>% group_by(Datum) %>% summarize(aantal=sum(Taxon.aantal)),aes(x = Datum, y = aantal)) + geom_point() + geom_smooth()
 ```
