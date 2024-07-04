@@ -2,23 +2,47 @@
 title: "Onderzoek naar vispasseerbaarheid van de sluisstuwcomplexen op het Afleidingskanaal van de Leie in Balgerhoeke en Schipdonk"
 author:
   - name:
-      given: "Lore"
-      family: "Vandamme"
-    email: "lore.vandamme@inbo.be"
-    orcid: "0009-0000-0500-9547"
-    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
-    corresponding: true
-  - name:
       given: "Stijn"
       family: "Bruneel"
     email: "stijn.bruneel@inbo.be"
     orcid: "0000-0002-8226-8080"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+    corresponding: true
+  - name:
+      given: "Lore"
+      family: "Vandamme"
+    email: "lore.vandamme@inbo.be"
+    orcid: "0009-0000-0500-9547"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "David"
       family: "Buysse"
     email: "david.buysse@inbo.be"
     orcid: "0000-0002-4437-5678"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Pieterjan"
+      family: "Verhelst"
+    email: "pieterjan.verhelst@inbo.be"
+    orcid: "0000-0002-2610-6941"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Sarah"
+      family: "Broos"
+    email: "sarah.broos@inbo.be"
+    orcid: "0000-0001-9742-6224"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Johan"
+      family: "Coeck"
+    email: "johan.coeck@inbo.be"
+    orcid: "0000-0003-2732-7428"
+    affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+  - name:
+      given: "Niko"
+      family: "De Maerteleire"
+    email: "nico.demaerteleire@inbo.be"
+    orcid: "?"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
       given: "Simon"
@@ -82,10 +106,13 @@ Hou het [Heerlijk Helder](https://overheid.vlaanderen.be/communicatie/heerlijk-h
 
 # Aanbevelingen voor beheer en/of beleid {-}
 
-Verplicht wanneer relevant.
+Het sluisstuwcomplex te Balgerhoeke is een volledige visbarrière en mitigatie van dit vismigratieknelpunt wordt aangeraden. De barrière te Balgerhoeke zou best volledig verwijdert worden, maar dit brengt natuurlijk logistische uitdagingen met zich mee zoals dijkschade en een einde aan de pleziervaart. Stroomopwaartse passage van glasaal is prioritair en kan ook gebeuren mbv een glasaalgoot, hevelvistrap of bekkenvistrap in het gedeelte van de oude sluis (zij het natuurlijk aan een verlaagde efficiëntie dan wanneer er geen barrière zou zijn). Een bekkenvistrap geniet de voorkeur omwille van de mogelijkheid voor zowel stroomopwaartse als stroomafwaartse migratie maar vergt een continue afvoer van minstens 1 m³/s om goed te functioneren. Dit kan bewerkstelligt worden via aangepast waterbeheer of een pompinstallatie. In het geval afvoer te laag en discontinue blijft en een pompinstallatie niet wenselijk, dan heeft een glasaalgoot de meeste kans van slagen. Ondanks de verschillende voordelen die een verhoogde connectiviteit met zich meebrengt lijkt de passeerbaarheid voor aanwezige potadrome vissen minder urgent. Ondanks het feit dat het relatief mager omgekeerd spuibeheer en de suboptimale stroming in het pand Zeebrugge-Balgerhoeke het jonge paling toch toelaat om stroomopwaarts tot aan Balgerhoeke te migreren, zou een meer frequente opening van de schuiven van Zeebrugge en een meer continue afvoer het migratiesucces ten goede komen. Zowel voor het functioneren van de vispassage als voor het migratiegedrag van vissen in de panden zelf, is het huidige debietverloop in het AKL ondermaats. 
+
+Een vispassage thv Schipdonk zou stroomopwaartse bewegende vissen toegang geven tot de Bovenschelde en de Leie wat ten zeerste aan te raden is aangezien het vele kilometers aan foerageer- en opgroeihabitats aanbiedt. In welke mate jonge paling gebruik zal kunnen maken van een vispassage te Schipdonk (verwijdering van het sluisstuwcomplex is hier zeer moeilijk omwille van de beschermende rol bij grote afvoerpieken) is afhankelijk van het passagesucces thv Balgerhoeke en het effect van de omgevingscondities in het pand Balgerhoeke-Schipdonk op de opwaartse migratie van jonge paling. Net als voor Balgerhoeke zal de vispassage moeten kunnen omgaan met algemeen lage debieten afgewisseld met plotse piekdebieten (indien er geen wijziging plaatsvindt in het debietverloop) en onder die omstandigheden bieden een palinggoot en/of visspassage met pompinstallatie de meeste perspectieven. 
 
 ```{r setup, include = FALSE}
 library(knitr)
+library(kableExtra)
 opts_chunk$set(
   echo = FALSE,
   eval = TRUE,
