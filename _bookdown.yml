@@ -1,4 +1,4 @@
-book_filename: "balgerhoeke_2024.Rmd"
+book_filename: "rapport-akl-vispasseerbaarheid.Rmd"
 output_dir: "./output"
 delete_merged_file: TRUE
 language:
@@ -14,4 +14,4 @@ language:
     ex:     'Voorbeeld '
     proof:  'Bewijs. '
     remark: 'Opmerking. '
-edit: https://github.com/spbruneel-INBO/Rapport_Balgerhoeke_INBO_2024/edit/main/%s
+edit: https://github.com/stijnbruneel/rapport-akl-vispasseerbaarheid/edit/main/%s
