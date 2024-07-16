@@ -96,6 +96,7 @@ output:
   INBOmd::gitbook: default
   INBOmd::pdf_report: default
   INBOmd::epub_book: default
+  bookdown::word_document2: default
 # Don't run the format below.
 # Only required for RStudio to recognise the project as a bookdown project.
 # Hence don't use 'Build all formats'.
