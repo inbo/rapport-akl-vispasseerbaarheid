@@ -313,7 +313,7 @@ vis.mat<-f.transformatie(vis.breed,"4root")
 vis.dist=vegdist(vis.mat, method="bray",binary=FALSE,diag = TRUE)
 ```
 
-```{r vis-pcoa, fig.height=10, fig.width=10, fig.cap="Principale coördinaten analyse (PCOA, CPUE, vierde-machtswortel transformatie, Bray-Curtis afstanden) met weergave van de verschillende sites (als omkaderingen) en de belangrijkste soorten (weergave als pijlen met lengte pijlen representatief voor bijdrage; p>0.05 en R²>0.4) om verschillen in gemeenschapsstructuur te verklaren"}
+```{r vis-pcoa, fig.height=10, fig.width=10, fig.cap="Principale coördinaten analyse (PCOA, CPUE, vierde-machtswortel transformatie, Bray-Curtis afstanden) met weergave van de verschillende sites (als omkaderingen) en de belangrijkste soorten (weergave als pijlen met lengte pijlen representatief voor bijdrage; p>0.05 en R²>0.4) om verschillen in gemeenschapsstructuur te verklaren."}
 groups <- vis.breed$plaats
 bdisp <- betadisper(vis.dist, groups)
 plot(bdisp,main=NULL, sub=NULL)
@@ -483,7 +483,7 @@ for (i in c("baars", "blankvoorn", "pos")){
 
 ### Jonge paling
 
-Op basis van de lengteverdeling (zie verder) kunnen we stellen dat de gevangen jonge paling vooral elvers betrof. Er werden enkel elvers gevonden t.h.v. Balgerhoeke. Het feit dat geen elvers gevangen werden in de substraten t.h.v. Schipdonk geeft aan dat elvers niet in staat zijn om de barrière van Balgerhoeke te passeren. In de palinggoot te Balgerhoeke werden tijdens de studieperiode 59 elvers gevangen met een gemiddelde lengte van 146 mm (standaarddeviatie van 25 mm). In de substraten te Balgerhoeke werden in totaal 1268 elvers gevangen met een gemiddelde lengte van 151 mm (standaarddeviatie van 29 mm). De lengtes lijken geen trend te vertonen doorheen de tijd. Zowel voor de palinggoot als de substraten was er een piek in aantallen rond midden mei. Daarvoor bleven de aantallen nagenoeg constant. Aangepast spuibeheer ter hoogte van Zeebrugge werd toegepast op 18/3, 31/3, 22/4, 27/4, 2/5 en 3/5 voor 270, 255, 450, 285, 450 en 575 minuten.
+Op basis van de lengteverdeling (Fig. \@ref(fig:palinglengtegoot) en Fig. \@ref(fig:palinglengtesubstraten)) kunnen we stellen dat de gevangen jonge paling vooral elvers betrof. Er werden enkel elvers gevonden t.h.v. Balgerhoeke. Het feit dat geen elvers gevangen werden in de substraten t.h.v. Schipdonk geeft aan dat elvers niet in staat zijn om de barrière van Balgerhoeke te passeren. In de palinggoot te Balgerhoeke werden tijdens de studieperiode 59 elvers gevangen met een gemiddelde lengte van 146 mm (standaarddeviatie van 25 mm). In de substraten te Balgerhoeke werden in totaal 1268 elvers gevangen met een gemiddelde lengte van 151 mm (standaarddeviatie van 29 mm). De lengtes lijken geen trend te vertonen doorheen de tijd (Fig. \@ref(fig:palinglengtegoottijd) en Fig. \@ref(fig:palinglengtesubstratentijd)). Zowel voor de palinggoot als de substraten was er een piek in aantallen rond midden mei. Daarvoor bleven de aantallen nagenoeg constant. Aangepast spuibeheer ter hoogte van Zeebrugge werd toegepast op 18/3, 31/3, 22/4, 27/4, 2/5 en 3/5 voor 270, 255, 450, 285, 450 en 575 minuten respectievelijk.
 
 ```{r include=FALSE}
 sum(vis.goot$Taxon.aantal)
@@ -497,7 +497,7 @@ sd(vis.substraat$Taxon.lengte,na.rm=TRUE)
 
 #### Palinggoot
 
-```{r fig.cap="Lengteverdeling van elvers gevangen met de palinggoot in Balgerhoeke voor de hele studieperiode."}
+```{r palinglengtegoot, fig.cap="Lengteverdeling van elvers gevangen met de palinggoot in Balgerhoeke voor de hele studieperiode."}
 ggplot(vis.goot, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("Aantal")
 ```
@@ -508,7 +508,7 @@ ggplot(vis.goot, aes(x = Taxon.lengte, weight = Taxon.aantal)) +
   facet_wrap(~ maand, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE))
 ```
 
-```{r fig.cap="Lengte van elvers gevangen met de palinggoot in Balgerhoeke in functie van de tijd."}
+```{r palinglengtegoottijd, fig.cap="Lengte van elvers gevangen met de palinggoot in Balgerhoeke in functie van de tijd."}
 ggplot(vis.goot, aes(x = Datum, y = Taxon.lengte)) + ylab("Vislengte (mm)") + geom_point() + geom_smooth()
 ```
 
@@ -518,7 +518,7 @@ ggplot(vis.goot %>% group_by(Datum) %>% summarize(aantal=sum(Taxon.aantal)),aes(
 
 #### Substraten
 
-```{r fig.cap="Lengteverdeling van elvers gevangen met substraten in Balgerhoeke voor de hele studieperiode."}
+```{r palinglengtesubstraten, fig.cap="Lengteverdeling van elvers gevangen met substraten in Balgerhoeke voor de hele studieperiode."}
 ggplot(vis.substraat, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("Aantal")
 ```
@@ -529,7 +529,7 @@ ggplot(vis.substraat, aes(x = Taxon.lengte, weight = Taxon.aantal)) +
   facet_wrap(~ maand, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE))
 ```
 
-```{r fig.cap="Lengte van elvers gevangen met substraten in Balgerhoeke in functie van de tijd."}
+```{r palinglengtesubstratentijd, fig.cap="Lengte van elvers gevangen met substraten in Balgerhoeke in functie van de tijd."}
 ggplot(vis.substraat, aes(x = Datum, y = Taxon.lengte)) + 
   geom_point() + geom_smooth() + ylab("Vislengte (mm")
 ```
