@@ -15,7 +15,7 @@ theme_set(theme_elsevier(8))
 
 ## Abiotiek
 
-Een overzicht van de tijdreeksen van relevante meetstations voor het studiegebied is gegeven in Figuur \@ref(fig:tijdreeksen). Een overzicht van de locaties is beschikbaar via deze [link](http://rpubs.com/spbruneel-INBO/maps_bal_schip).
+Een overzicht van de tijdreeksen van relevante meetstations voor het studiegebied is gegeven in Figuren \@ref(fig:tijdreeksen) en \@ref(fig:tijdreeksenstudieperiode). Een overzicht van de locaties is beschikbaar via deze [link](http://rpubs.com/spbruneel-INBO/maps_bal_schip).
 
 ```{r}
 files<-list.files(path="./data/abiotiek/extern/metingen/",pattern = ".csv")
@@ -40,7 +40,7 @@ data$var=factor(data$var, levels=c("Waterpeil","Afvoer","Watertemperatuur"))
 remove(files,path,file_name,temp)
 ```
 
-```{r tijdreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van waterpeil (m), afvoer (m³/s) en temperatuur (°C) voor relevante meetstations doorheen de tijd. De stations staan geordend van stroomafwaarts naar stroomopwaarts. De meetstations van Damme en Maldegem liggen in het pand Zeebrugge-Balgerhoeke. De meetstations van Adegem-Balgerhoeke, Zomergem en Merendree Afwaarts liggen in het pand Balgerhoeke-Schipdonk. Het meetstation Merendree Opwaarts ligt stroomopwaarts van Schipdonk. Rode lijnen begrenzen de studieperiode. De groene lijn geeft de gesmoothe trend aan (span=1)."}
+```{r tijdreeksen, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van waterpeil (m), afvoer (m³/s) en temperatuur (°C) voor relevante meetstations doorheen de tijd. De stations staan geordend van stroomafwaarts naar stroomopwaarts. De meetstations van Damme en Maldegem liggen in het pand Zeebrugge-Balgerhoeke. De meetstations van Adegem-Balgerhoeke, Zomergem en Merendree Afwaarts liggen in het pand Balgerhoeke-Schipdonk. Het meetstation Merendree Opwaarts ligt stroomopwaarts van Schipdonk. Rode lijnen begrenzen de studieperiode (22 maart 2023 - 25 mei 2023). De groene lijn geeft de gesmoothe trend aan (span=1)."}
 date_range <- which(data$date_utc %in% as.Date(c("2023-03-22", "2023-05-25")) )
 
 ggplot(data, aes(x = date_utc, y = value)) + 
@@ -52,7 +52,7 @@ ggplot(data, aes(x = date_utc, y = value)) +
   scale_x_datetime(date_labels = "%d-%m", date_breaks = "15 days") + geom_smooth(color="green")
 ```
 
-```{r tijdreeksenstudieperiode, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van waterpeil (m), afvoer (m³/s) en temperatuur (°C) voor relevante meetstations doorheen de tijd voor de studieperiode. De stations staan geordend van stroomafwaarts naar stroomopwaarts. De meetstations van Damme en Maldegem liggen in het pand Zeebrugge-Balgerhoeke. De meetstations van Adegem-Balgerhoeke, Zomergem en Merendree Afwaarts liggen in het pand Balgerhoeke-Schipdonk. Het meetstation Merendree Opwaarts ligt stroomopwaarts van Schipdonk. De groene lijn geeft de gesmoothe trend aan (span=1)."}
+```{r tijdreeksenstudieperiode, fig.height=10, fig.width=10, fig.cap="Overzicht van metingen van waterpeil (m), afvoer (m³/s) en temperatuur (°C) voor relevante meetstations doorheen de tijd voor de studieperiode (22 maart 2023 - 25 mei 2023) De stations staan geordend van stroomafwaarts naar stroomopwaarts. De meetstations van Damme en Maldegem liggen in het pand Zeebrugge-Balgerhoeke. De meetstations van Adegem-Balgerhoeke, Zomergem en Merendree Afwaarts liggen in het pand Balgerhoeke-Schipdonk. Het meetstation Merendree Opwaarts ligt stroomopwaarts van Schipdonk. De groene lijn geeft de gesmoothe trend aan (span=1)."}
 ggplot(data %>% dplyr::filter(date_utc>as.POSIXct("2023-03-22") & date_utc<as.POSIXct("2023-05-25")), aes(x = date_utc, y = value)) + 
   geom_line() +
   xlab("Datum") + ylab("Waarde") +
@@ -61,9 +61,9 @@ ggplot(data %>% dplyr::filter(date_utc>as.POSIXct("2023-03-22") & date_utc<as.PO
   scale_x_datetime(date_labels = "%d-%m", date_breaks = "15 days") + geom_smooth(color="green")
 ```
 
-Stroomafwaarts van Balgerhoeke t.h.v. het meetpunt te Maldegem, varieerde het waterpeil tijdens de studieperiode tussen ongeveer 1.3 meter en 2.8 meter terwijl stroomopwaarts, t.h.v. het meetpunt te Balgerhoeke, het waterpeil slechts varieerde tussen de 4.9 en 5.1 meter. Het verval t.h.v. de stuw van Balgerhoeke bedroeg gemiddeld 3.30 meter en varieerde tussen 2.22 en 3.71 meter. Stroomopwaarts van Schipdonk varieerde het waterpeil tussen ongeveer 5.55 meter en 6.0 meter (meetpunt Merendree stroomopwaarts) terwijl stroomafwaarts het waterpeil slecht varieerde tussen de 4.95 en 5.15 meter (meetpunt Merendree stroomafwaarts). Het verval t.h.v. de stuw van Schipdonk bedroeg gemiddeld 0.70 meter en varieerde tussen 0.49 en 0.96 meter. Tussen Balgerhoeke en Schipdonk varieerde het waterpeil tussen de 4.95 en 5.10 meter (meetpunt Zomergem).
+Stroomafwaarts van Balgerhoeke t.h.v. het meetpunt te Maldegem, varieerde het waterpeil tijdens de studieperiode (22 maart 2023 - 25 mei 2023) tussen ongeveer 1.3 meter en 2.8 meter terwijl stroomopwaarts, t.h.v. het meetpunt te Balgerhoeke, het waterpeil slechts varieerde tussen de 4.9 en 5.1 meter. Het verval t.h.v. de stuw van Balgerhoeke bedroeg gemiddeld 3.30 meter en varieerde tussen 2.22 en 3.71 meter. Stroomopwaarts van Schipdonk varieerde het waterpeil tussen ongeveer 5.55 meter en 6.0 meter (meetpunt Merendree stroomopwaarts) terwijl stroomafwaarts het waterpeil slecht varieerde tussen de 4.95 en 5.15 meter (meetpunt Merendree stroomafwaarts). Het verval t.h.v. de stuw van Schipdonk bedroeg gemiddeld 0.70 meter en varieerde tussen 0.49 en 0.96 meter. Tussen Balgerhoeke en Schipdonk varieerde het waterpeil tussen de 4.95 en 5.10 meter (meetpunt Zomergem).
 
-De afvoer stroomafwaarts van Balgerhoeke (meetpunt Damme) bedraagt wordt gekenmerkt door plotse pieken van ongeveer 20 m³ en een gemiddelde afvoer van 2.03 m³/s. Wanneer de piekdebieten niet in rekening worden gebracht bedraagt de gemiddelde afvoer -0.006 m³/s. De stroomopwaartse debieten (i.e. de negatieve waarden) bedragen 49 % van de data en zijn in absolute waarde niet meer dan 2.96 m³/s. De afvoer tussen Balgerhoeke en Schipdonk (meetpunt Zomergem) bedraagt zelden meer dan 2.5 m³/s, is gemiddeld 0.28 m³ en varieert tussen -1.51 m³/s en 3.01 m³/s. De stroomopwaartse debieten bedragen 26 % van de data en zijn in absolute waarde niet meer dan 1.51 m³/s.
+De afvoer stroomafwaarts van Balgerhoeke (meetpunt Damme) bedraagt wordt gekenmerkt door plotse pieken van ongeveer 20 m³ en een gemiddelde afvoer van 2.03 m³/s (Tabel \@ref(tab:debietoverzicht)). Wanneer de piekdebieten niet in rekening worden gebracht bedraagt de gemiddelde afvoer -0.006 m³/s. De stroomopwaartse debieten (i.e. de negatieve waarden) bedragen 49 % van de data en zijn in absolute waarde niet meer dan 2.96 m³/s. De afvoer tussen Balgerhoeke en Schipdonk (meetpunt Zomergem) bedraagt zelden meer dan 2.5 m³/s, is gemiddeld 0.28 m³ en varieert tussen -1.51 m³/s en 3.01 m³/s. De stroomopwaartse debieten bedragen 26 % van de data en zijn in absolute waarde niet meer dan 1.51 m³/s.
 
 Een bekkenvistrap heeft een continue debiet van minsten 1 m³/s nodig om goed te functioneren [@vanpoucke1994]. In het pand Balgerhoeke-Schipdonk is het gemiddelde debiet slechts 0.28 m³/s en wordt er slechts 6% van de tijd een debiet groter dan 1 m³/s vastgesteld. Installatie van een bekkenvistrap ter hoogte van het pand Balgerhoeke-Schipdonk onder de huidige omstandigheden zou dus resulteren in suboptimale werking. In de zomer zou het debiet wellicht nog lager liggen door de droogteproblematiek waar het kanaal Gent-Terneuzen en de Zeeschelde mee te kampen hebben.
 
@@ -120,7 +120,7 @@ mapa <- leaflet(shape1) %>% addTiles() %>% addMarkers() %>%       addCircleMarke
 mapa
 ```
 
-```{r}
+```{r debietoverzicht}
 data %>% 
   group_by(loc) %>% 
   dplyr::filter(date_utc>as.POSIXct("2023-03-22") & date_utc<as.POSIXct("2023-05-25") & var == "Afvoer") %>%
@@ -138,7 +138,7 @@ data %>%
             'Aandeel studieperiode < 20 m³' = round(sum(value<20,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
             'Aandeel studieperiode < 30 m³' = round(sum(value<30,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2)) %>%
   pivot_summary(loc) %>%
-  rename(Debiet = column) %>% kable(caption="Gemiddeld debiet, mediaan debiet en aandeel studieperiode dat debiet onder een opgegeven waarde lag voor stations te Damme (pand Zeebrugge-Balgerhoeke) en Zomergem (pand Balgerhoeke-Schipdonk).")
+  rename(Debiet = column) %>% kable(caption="Gemiddeld debiet, mediaan debiet en aandeel studieperiode (22 maart 2023 - 25 mei 2023) dat debiet onder een opgegeven waarde lag voor stations te Damme (pand Zeebrugge-Balgerhoeke) en Zomergem (pand Balgerhoeke-Schipdonk).")
 ```
 
 ## Vissen
@@ -225,14 +225,14 @@ vis.substraat$Taxon.lengte[which(vis.substraat$Taxon.lengte<30)]=NA
 
 ### Data-overzicht
 
-De fuiken, hokfuik en schietfuiken, te Balgerhoeke werden om logistische redenen samengenomen en worden daarom één meetplaatscode (balfuik) toegekend. In totaal werden 4575 vissen gevangen met de fuiken te Balgerhoeke (Tabel \@ref(tab:totalen)). In de palinggoot werd ongeveer 5% gevangen (59 elvers) van wat er werd gevangen met de substraten in Balgerhoeke (1270 elvers). De substraten t.h.v. de oevers te Balgerhoeke vingen in totaal ongeveer 5 tot 10 keer meer dan de substraten t.h.v. oude sluis en palinggoot respectievelijk. In totaal werden 8524 vissen gevangen met de fuiken te Schipdonk (Tabel \@ref(tab:totalen)). In totaal werden t.h.v. de sifon meer vissen gevangen dan t.h.v. de sluis van Schipdonk ondanks dat t.h.v de sluis twee fuiken werden gebruikt en t.h.v. de sifon slechts één.
+De fuiken, hokfuik en schietfuiken, te Balgerhoeke werden om logistische redenen samengenomen en worden daarom één meetplaatscode (balfuik) toegekend. In totaal werden 4575 vissen gevangen met de fuiken te Balgerhoeke (Tabel \@ref(tab:totalentechniek)). In de palinggoot werd ongeveer 5% gevangen (59 elvers) van wat er werd gevangen met de substraten in Balgerhoeke (1270 elvers) (Tabel \@ref(tab:totalenlocatie)). De substraten t.h.v. de oevers te Balgerhoeke vingen in totaal ongeveer 5 tot 10 keer meer dan de substraten t.h.v. oude sluis en palinggoot respectievelijk. In totaal werden 8524 vissen gevangen met de fuiken te Schipdonk (Tabel \@ref(tab:totalentechniek)). In totaal werden t.h.v. de sifon meer vissen gevangen dan t.h.v. de sluis van Schipdonk ondanks dat t.h.v de sluis twee fuiken werden gebruikt en t.h.v. de sifon slechts één.
 
-```{r totalen}
+```{r totalentechniek}
 options(knitr.kable.NA = 0)
 vis %>% group_by(Meetplaatscode,Methode) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(Methode), values_from = c(aantal)) %>% kable(caption="Overzicht vangsten per meetplaats en datum. balfuik: hokfuik en schietfuiken linkeroever en rechteroever Balgerhoeke, balgoo: Palinggoot Balgerhoeke, balsgo: Substraat t.h.v. palinggoot Balgerhoeke, balli: Substraat linkeroever Balgerhoeke, balre: Substraat rechteroever Balgerhoeke, balslu: Substraat oude sluis Balgerhoeke, mersif: Schietfuik sifon Merendree, merlo: Schietfuik linkeroever sluis Merendree, merro: Schietfuik rechteroever sluis Merendree. De substraten te Schipdonk staan hier niet weergegeven omdat er nooit paling in werd gevonden.")
 ```
 
-```{r}
+```{r totalenlocatie}
 options(knitr.kable.NA = 0)
 vis %>% group_by(Meetplaatscode,Datum) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(Meetplaatscode), values_from = c(aantal)) %>% kable(caption="Overzicht vangsten per meetplaats en datum. balfuik: hokfuik en schietfuiken linkeroever en rechteroever Balgerhoeke, balgoo: Palinggoot Balgerhoeke, balsgo: Substraat t.h.v. palinggoot Balgerhoeke, balli: Substraat linkeroever Balgerhoeke, balre: Substraat rechteroever Balgerhoeke, balslu: Substraat oude sluis Balgerhoeke, mersif: Schietfuik sifon Merendree, merlo: Schietfuik linkeroever sluis Merendree, merro: Schietfuik rechteroever sluis Merendree. De substraten te Schipdonk staan hier niet weergegeven omdat er nooit paling in werd gevonden.")
 ```
@@ -252,58 +252,58 @@ vis.breed <- vis.fuik %>%
 
 #### Gemeenschapsstructuur
 
-Alle geobserveerde soorten (19 in totaal) die werden gevangen in Balgerhoeke werden ook gevangen in Schipdonk (met uitzondering van 1 driedoornige stekelbaars in Balgerhoeke). In Balgerhoeke, Schipdonk sifon en Schipdonk sluizen bedroeg de Shannon diversiteit gemiddeld 1.19, 1.43 en 1.45 respectievelijk. Er waren sterke verschillen in de aantallen van sommige soorten. In Balgerhoeke werd in totaal veel meer bittervoorn en snoek en veel minder kolblei en zonnebaars gevangen. Aantallen en soort werden gebruikt om de gemeenschapsstructuur van de drie sites (Balgerhoeke, Schipdonk sifon en Schipdonk sluis) en drie maanden te vergelijken (PERMANOVA, Bray-curtis afstand, vierde-wortel van de fuikvangsten per fuikdag en per soort). Alle drie sites bleken significant verschillend met de grootste verschillen tussen Balgerhoeke enerzijds en Schipdonk anderzijds. Er werd een significant verschil genoteerd tussen de maanden mei enerzijds en maart en april anderzijds. De variabiliteit in gemeenschapsstructuur was voornamelijk het gevolg van verschillen in voorkomen van pos (vnl. Balgerhoeke), baars (vnl. Balgerhoeke), brasem (vnl. Schipdonk sifon), blankvoorn (vnl. Schipdonk sifon) en kolblei (vnl. Schipdonk sifon).
+Alle geobserveerde soorten (19 in totaal) die werden gevangen in Balgerhoeke werden ook gevangen in Schipdonk (met uitzondering van 1 driedoornige stekelbaars in Balgerhoeke) (Tabellen \@ref(tab:balgerhoekefuikdag), \@ref(tab:balgerhoekefuik), \@ref(tab:schipdonksifonfuikdag), \@ref(tab:schipdonksifonfuik), \@ref(tab:schipdonksluisfuikdag), \@ref(tab:schipdonksluisfuik), \@ref(tab:vangstfuikdag) en \@ref(tab:vangstfuik)). In Balgerhoeke, Schipdonk sifon en Schipdonk sluizen bedroeg de Shannon diversiteit gemiddeld 1.19, 1.43 en 1.45 respectievelijk. Er waren sterke verschillen in de aantallen van sommige soorten. In Balgerhoeke werd in totaal veel meer bittervoorn en snoek en veel minder kolblei en zonnebaars gevangen (Figuren \@ref(fig:visbarplotabsoluutfuikdag) en \@ref(fig:visbarplotabsoluutfuik)). Aantallen en soort werden gebruikt om de gemeenschapsstructuur van de drie sites (Balgerhoeke, Schipdonk sifon en Schipdonk sluis) en drie maanden te vergelijken (PERMANOVA, Bray-curtis afstand, vierde-wortel van de fuikvangsten per fuikdag en per soort). Alle drie sites bleken significant verschillend met de grootste verschillen tussen Balgerhoeke enerzijds en Schipdonk anderzijds (Figuur \@ref(fig:vis-pcoa)). Er werd een significant verschil genoteerd tussen de maanden mei enerzijds en maart en april anderzijds. De variabiliteit in gemeenschapsstructuur was voornamelijk het gevolg van verschillen in voorkomen van pos (vnl. Balgerhoeke), baars (vnl. Balgerhoeke), brasem (vnl. Schipdonk sifon), blankvoorn (vnl. Schipdonk sifon) en kolblei (vnl. Schipdonk sifon).
 
 ```{r}
 shannon<-vis.fuik %>% group_by(Meetplaatscode,Datum,soort,maand,plaats) %>% summarise(CPUE=sum(CPUE)) %>% ungroup() %>% dplyr::summarize(shannon = vegan::diversity(CPUE), .by = c(Meetplaatscode,Datum,maand,plaats)) %>% group_by(plaats) %>% summarise(shannon=mean(shannon))
 ```
 
-```{r include=TRUE}
+```{r balgerhoekefuikdag, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% dplyr::filter(plaats %in% c("Balgerhoeke")) %>% group_by(Meetplaatscode,Datum,soort,maand) %>% summarize(CPUE=sum(CPUE)) %>% ungroup() %>% group_by(maand,soort) %>% summarize(CPUE=round(mean(CPUE),digits=2)) %>% pivot_wider(names_from = c(maand), values_from = c(CPUE)) %>% kable(caption="Soortensamenstelling en overzicht van de gemiddelde aantallen per fuikdag, per vissoort en per maand in Balgerhoeke (sampling effort in rekening gebracht)") 
 ```
 
-```{r include=TRUE}
+```{r balgerhoekefuik, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% dplyr::filter(plaats %in% c("Balgerhoeke")) %>% group_by(maand,soort) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale fuikvangsten per vissoort en per maand in Balgerhoeke (sampling effort niet in rekening gebracht)")
 ```
 
-```{r include=TRUE}
+```{r schipdonksifonfuikdag, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% dplyr::filter(plaats %in% c("Schipdonk sifon")) %>% group_by(Meetplaatscode,Datum,soort,maand) %>% summarize(CPUE=sum(CPUE)) %>% ungroup() %>% group_by(maand,soort) %>% summarize(CPUE=round(mean(CPUE),digits=2)) %>% pivot_wider(names_from = c(maand), values_from = c(CPUE)) %>% kable(caption="Soortensamenstelling en overzicht van de gemiddelde aantallen per fuikdag, per vissoort en per maand in Schipdonk sifon (sampling effort in rekening gebracht)")
 ```
 
-```{r include=TRUE}
+```{r schipdonksifonfuik, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% dplyr::filter(plaats %in% c("Schipdonk sifon")) %>% group_by(maand,soort) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale fuikvangsten per vissoort en per maand in Schipdonk sifon (sampling effort niet in rekening gebracht)")
 ```
 
-```{r include=TRUE}
+```{r schipdonksluisfuikdag, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% dplyr::filter(plaats %in% c("Schipdonk sluis")) %>% group_by(Meetplaatscode,Datum,soort,maand) %>% summarize(CPUE=sum(CPUE)) %>% ungroup() %>% group_by(maand,soort) %>% summarize(CPUE=round(mean(CPUE),digits=2)) %>% pivot_wider(names_from = c(maand), values_from = c(CPUE)) %>% kable(caption="Soortensamenstelling en overzicht van de gemiddelde aantallen per fuikdag, per vissoort en per maand aan de Schipdonk sluizen (sampling effort in rekening gebracht)")
 ```
 
-```{r include=TRUE}
+```{r schipdonksluisfuik, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% dplyr::filter(plaats %in% c("Schipdonk sluis")) %>% group_by(maand,soort) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(maand), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale fuikvangsten per vissoort en per maand in Schipdonk sluis (sampling effort niet in rekening gebracht)")
 ```
 
-```{r include=TRUE}
+```{r vangstfuikdag, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% group_by(Meetplaatscode,Datum,soort,maand,plaats) %>% summarize(CPUE=sum(CPUE)) %>% ungroup() %>% group_by(plaats,soort) %>% summarize(CPUE=round(mean(CPUE),digits=2)) %>% pivot_wider(names_from = c(plaats), values_from = c(CPUE)) %>% kable(caption="Soortensamenstelling en overzicht van de gemiddelde vangsten per fuikdag, per vissoort voor de hele periode voor Schipdonk en Balgerhoeke (sampling effort in rekening gebracht)")
 ```
 
-```{r include=TRUE}
+```{r vangstfuik, include=TRUE}
 options(knitr.kable.NA = 0)
 vis.fuik %>% group_by(plaats,soort) %>% summarize(aantal=sum(Taxon.aantal)) %>% pivot_wider(names_from = c(plaats), values_from = c(aantal)) %>% kable(caption="Soortensamenstelling en overzicht van de totale fuikvangsten per vissoort voor de hele periode voor Schipdonk en Balgerhoeke (sampling effort niet in rekening gebracht)")
 ```
 
-```{r vis-barplot-absoluut1, fig.cap ="Verdeling van de gemiddelde vangsten per fuikdag en per vissoort in Balgerhoeke, Schipdonk sifon en Schipdonk sluis per maand (rest = overige vissoorten die elk minder dan 5% van de vangsten uitmaken)."}
+```{r visbarplotabsoluutfuikdag, fig.cap ="Verdeling van de gemiddelde vangsten per fuikdag en per vissoort in Balgerhoeke, Schipdonk sifon en Schipdonk sluis per maand (rest = overige vissoorten die elk minder dan 5% van de vangsten uitmaken)."}
 domvis<-f.dominant.species(vis.fuik,0.05,type="cpue")
 ggplot(domvis, aes(fill=soort, y=CPUE, x=maand)) + geom_bar(position="stack", stat="identity") + facet_wrap(~plaats) + ylab("Gemiddeld aantal (per fuikdag)")  + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
 
-```{r vis-barplot-absoluut2, fig.cap ="Verdeling van de totale fuikvangsten per vissoort in Balgerhoeke, Schipdonk sifon en Schipdonk sluis per maand (rest = overige vissoorten die elk minder dan 5% van de vangsten uitmaken)."}
+```{r visbarplotabsoluutfuik, fig.cap ="Verdeling van de totale fuikvangsten per vissoort in Balgerhoeke, Schipdonk sifon en Schipdonk sluis per maand (rest = overige vissoorten die elk minder dan 5% van de vangsten uitmaken)."}
 domvis<-f.dominant.species(vis.fuik,0.05,type="aantal")
 ggplot(domvis, aes(fill=soort, y=Taxon.aantal, x=maand)) + geom_bar(position="stack", stat="identity") + facet_wrap(~plaats) + ylab("Totale fuikvangsten")  + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
@@ -346,15 +346,29 @@ f.pairwise.adonis(vis.dist, vis.breed$maand)
 
 #### Lengteverdeling
 
-```{r fig.height=10, fig.width=10, fig.cap="Lengteverdeling voor de verschillende gevangen soorten voor de hele periode voor Schipdonk en Balgerhoeke. De inverse van de CPUE werd gebruikt als gewicht voor de metingen."}
+De lengteverdeling per soort (Figuur \@ref(fig:lengteverdelingfuik)) verschilde in een aantal gevallen tussen de drie locaties (Balgerhoeke, sluizen van Schipdonk en de sifon van Schipdonk). Voor blauwband, driedoornige stekelbaars, giebel, karper, rietvoorn, snoek, en zeelt en zonnebaars waren de aantallen te klein om onderbouwde conclusies te trekken over mogelijke verschillen tussen de locaties. Baars was groter t.h.v. de Schipdonk sluis (Figuur \@ref(fig:lengteverdelingboxplot)). Blankvoorn was het grootst t.h.v. Balgerhoeke gevolgd door Schipdonk sluis en sifon. Brasem was groter t.h.v. Schipdonk sluis. Kolblei was groter t.h.v. de Schipdonk sluis dan Schipdonk sifon. Pos was het kleinst t.h.v. Schipdonk sluis. Snoekbaars was veel groter in Balgerhoeke. Zwartbekgrondel was het grootst t.h.v. Balgerhoeke gevolgd door Schipdonk sifon en sluis.
+
+```{r lengteverdelingfuik, fig.height=10, fig.width=10, fig.cap="Lengteverdeling voor de verschillende gevangen soorten voor de hele periode voor Schipdonk en Balgerhoeke. De inverse van de CPUE werd gebruikt als gewicht voor de metingen."}
 ggplot(vis.fuik, aes(x = Taxon.lengte, weight = CPUE)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("CPUE") +
   facet_wrap(~ soort, scales="free", labeller = label_wrap_gen(multi_line=FALSE))
 ```
 
+```{r}
+cmpr<-list(c('Balgerhoeke','Schipdonk sifon'),        
+ c('Balgerhoeke','Schipdonk sluis'),        
+ c('Schipdonk sifon','Schipdonk sluis')
+ )
+symnum.args <- list(cutpoints = c(0, 0.0001, 0.001, 0.01, 0.05, Inf), symbols = c("****", "***", "**", "*", "ns"))
+```
+
+```{r lengteverdelingboxplot, fig.height=10, fig.width=10, fig.cap="Boxplots die de gemiddelde lengte van de fuikvangsten voorstellen in functie van de bemonsteringslocatie. Gepaarde wilcoxon ranks sum testen met Bonferroni correctie werden gebruikt. p-waarden werden geclassificeerd als niet-significant of ns ($>$0.05), * (0.05-0.01), ** (0.01-0.001), *** (0.001-0.0001), **** (0.0001-0)."}
+ggplot(data=vis.fuik%>%dplyr::filter(soort %in% c("baars","bittervoorn","blankvoorn","brasem","kolblei","paling","pos","riviergrondel","snoekbaars","zwartbekgrondel")),aes(plaats, Taxon.lengte),size = 0.5, color = "black") + geom_boxplot(linetype = 1, position = position_dodge(0.5)) + facet_wrap(~soort, scales="free_y") + ylab("Lengte (mm)") + xlab("Plaats") + theme_bw() + theme(text = element_text(size = 12, family = "serif"), axis.text.x = element_text(angle = 45, hjust = 0.5, vjust = 0.5, family = "serif"), strip.background = element_rect(colour = "black", fill = "white"), legend.position = "bottom") + stat_compare_means(comparisons = cmpr, method = "wilcox.test", symnum.args = symnum.args, p.adjust.method = "bonferroni", label='p.adj') 
+```
+
 #### Hervangst
 
-Enkel in Balgerhoeke werden vissen gemerkt om na te gaan hoeveel vissen zich ophopen ter hoogte van de barrière. Het aandeel hervangst steeg doorheen de tijd licht voor baars, bittervoorn, blankvoorn en brasem en leek sterk te stijgen voor paling. Pos, snoek en snoekbaars kenden aanvankelijk een stijging in hervangst maar deze daalde weer na een zekere periode. Giebel, kolblei en riviergrondel werden nooit opnieuw gevangen. Zwartebekgrondels werden verwijderd bij vangst omdat dit een invasieve exoot is.
+Enkel in Balgerhoeke werden vissen gemerkt om na te gaan hoeveel vissen zich ophopen ter hoogte van de barrière. Het aandeel hervangst steeg doorheen de tijd licht voor baars, bittervoorn, blankvoorn en brasem en leek sterk te stijgen voor paling (Figuur \@ref(fig:hervangst)). Pos, snoek en snoekbaars kenden aanvankelijk een stijging in hervangst maar deze daalde weer na een zekere periode. Giebel, kolblei en riviergrondel werden nooit opnieuw gevangen. Zwartebekgrondels werden verwijderd bij vangst omdat dit een invasieve exoot is.
 
 ```{r}
 hervangst <- vis.fuik %>% 
@@ -370,7 +384,7 @@ hervangst <- vis.fuik %>%
          aandeel=aantal/totaal.aantal) 
 ```
 
-```{r fig.height=10, fig.width=10, fig.cap="Aandeel hervangst op totale fuikvangst per soort. Elk punt geeft de vangst van één dag weer. De grootte van de punten weerspiegelt de totale vangst per soort. Loess smoothing (span=1) werd gebruikt om een eventuele trend te visualiseren (blauwe lijn). Voor deze smoothing krijgen dagen met een grotere vangst een groter gewicht (lineaire verhouding toekenning gewicht). 95% betrouwbaarheidsintervallen van de loess smoothing zijn weergegeven als een grijze band."}
+```{r hervangst, fig.height=10, fig.width=10, fig.cap="Aandeel hervangst op totale fuikvangst per soort. Elk punt geeft de vangst van één dag weer. De grootte van de punten weerspiegelt de totale vangst per soort. Loess smoothing (span=1) werd gebruikt om een eventuele trend te visualiseren (blauwe lijn). Voor deze smoothing krijgen dagen met een grotere vangst een groter gewicht (lineaire verhouding toekenning gewicht). 95% betrouwbaarheidsintervallen van de loess smoothing zijn weergegeven als een grijze band."}
 ggplot(hervangst[which(hervangst$plaats=="Balgerhoeke" & hervangst$gemerkt=="j" & is.nan(hervangst$aandeel)==FALSE),], aes(x = Datum, y = aandeel)) + 
   geom_point(aes(size=(totaal.aantal)),alpha=0.3) +
   geom_smooth(aes(weight=totaal.aantal),span=1) + 
@@ -382,9 +396,9 @@ ggplot(hervangst[which(hervangst$plaats=="Balgerhoeke" & hervangst$gemerkt=="j" 
 
 #### Reproductie
 
-Om een zicht te krijgen op het aandeel individuen met paaikenmerken werden hervangsten niet beschouwd. Op die manier werd verhinderd dat vissen die zich ophopen ter hoogte van de barrière meerdere keren werden geteld. Van de soorten waarvan er voldoende individuen waren om betrouwbare trends te bekomen, vertoonden vooral baars (25-50%) en pos (15-45%) paaikenmerken. De trend doorheen de tijd was voor beide soorten grillig maar leek voor baars eerst te dalen en dan te stijgen terwijl deze voor pos voornamelijk licht daalde. Blankvoorn vertoonde zelden paaikenmerken (5-10%). Voor brasem, giebel en kolblei werden geen paaikenmerken vastgesteld.
+Om een zicht te krijgen op het aandeel individuen met paaikenmerken werden hervangsten niet beschouwd (Figuur \@ref(fig:reproductie-niet-gemerkt)). Op die manier werd verhinderd dat vissen die zich ophopen ter hoogte van de barrière meerdere keren werden geteld. Van de soorten waarvan er voldoende individuen waren om betrouwbare trends te bekomen, vertoonden vooral baars (25-50%) en pos (15-45%) paaikenmerken. De trend doorheen de tijd was voor beide soorten grillig maar leek voor baars eerst te dalen en dan te stijgen terwijl deze voor pos voornamelijk licht daalde. Blankvoorn vertoonde zelden paaikenmerken (5-10%). Voor brasem, giebel en kolblei werden geen paaikenmerken vastgesteld.
 
-Men zou verwachten dat individuen die op het punt staan om te paaien een grotere drive hebben om te migreren. Dit zou betekenen dat er een grotere kans is om paaikenmerken te observeren bij gemerkte individuen (ie individuen die meermaals verbleven t.h.v. de barrière). Wanneer we echter het aandeel vissen met paaikenmerken die slechts één keer werden gevangen (i.e. niet-gemerkte vissen) vergelijken met het aandeel hervangsten met paaikenmerken (i.e. gemerkte vissen) dan zien we bij baars en pos een verlaagde kans op paaikenmerken gegeven dat een individu hervangst is (i.e. gemerkt is). Dit wordt ook bevestigd door een logistische gam analyse voor baars, blankvoorn, en pos waarbij voor elke soort een model is ontwikkeld met als respons of een individu al dan niet paaikenmerken vertoont en als verklarende factoren de vislengte, of een individu al dan niet hervangst is (i.e. gemerkt is) en de datum (die werd beschouwd als een smooth factor, waarbij we niet zozeer geïnteresseerd zijn in het effect van deze factor maar het effect ervan erkennen en in rekening brengen). Voor baars en pos had datum als smooth factor een significant effect wat te verwachten is gezien het sterk temporeel karakter van paaikenmerken. Voor baars en pos had de aanwezigheid van een merkteken (i.e. hervangst) een significant negatief effect op de aanwezigheid van paaikenmerken. Dit suggereert dat vissen met paaikenmerken zich niet bij de barrière ophoopten. Voor baars was ook de vislengte belangrijk waarbij langere individuen een significant grotere kans hadden om paaikenmerken te vertonen. Voor blankvoorn had geen enkele factor (datum, merkteken of vislengte) een significant effect op de kans op paaikenmerken.
+Men zou verwachten dat individuen die op het punt staan om te paaien een grotere drive hebben om te migreren. Dit zou betekenen dat er een grotere kans is om paaikenmerken te observeren bij gemerkte individuen (ie individuen die meermaals verbleven t.h.v. de barrière). Wanneer we echter het aandeel vissen met paaikenmerken die slechts één keer werden gevangen (i.e. niet-gemerkte vissen: Figuur \@ref(fig:reproductie-niet-gemerkt)) vergelijken met het aandeel hervangsten met paaikenmerken (i.e. gemerkte vissen: Figuur \@ref(fig:reproductie-gemerkt)) dan zien we bij baars en pos een verlaagde kans op paaikenmerken gegeven dat een individu hervangst is (i.e. gemerkt is). Dit wordt ook bevestigd door een logistische gam analyse voor baars, blankvoorn, en pos waarbij voor elke soort een model is ontwikkeld met als respons of een individu al dan niet paaikenmerken vertoont en als verklarende factoren de vislengte, of een individu al dan niet hervangst is (i.e. gemerkt is) en de datum (die werd beschouwd als een smooth factor, waarbij we niet zozeer geïnteresseerd zijn in het effect van deze factor maar het effect ervan erkennen en in rekening brengen). Voor baars en pos had datum als smooth factor een significant effect wat te verwachten is gezien het sterk temporeel karakter van paaikenmerken. Voor baars en pos had de aanwezigheid van een merkteken (i.e. hervangst) een significant negatief effect op de aanwezigheid van paaikenmerken. Dit suggereert dat vissen met paaikenmerken zich niet bij de barrière ophoopten. Voor baars was ook de vislengte belangrijk waarbij langere individuen een significant grotere kans hadden om paaikenmerken te vertonen. Voor blankvoorn had geen enkele factor (datum, merkteken of vislengte) een significant effect op de kans op paaikenmerken.
 
 ```{r}
 reproductie <- vis.fuik %>% 
@@ -424,7 +438,7 @@ reproductie.en.gemerkt <- vis.fuik %>%
          aandeel=aantal/totaal.aantal) 
 ```
 
-```{r fig.height=10, fig.width=10, fig.cap="Aandeel niet-gemerkte vissen met paaikenmerken op totale fuikvangst per soort. Elk punt geeft de vangst van één dag weer. De grootte van de punten weerspiegelt de totale vangst per soort. Loess smoothing (span=1) werd gebruikt om een eventuele trend te visualiseren (blauwe lijn). Voor deze smoothing krijgen dagen met een grotere vangst een groter gewicht (lineaire verhouding toekenning gewicht). 95% betrouwbaarheidsintervallen van de loess smoothing zijn weergegeven als een grijze band."}
+```{r reproductie-niet-gemerkt, fig.height=10, fig.width=10, fig.cap="Aandeel niet-gemerkte vissen met paaikenmerken op totale fuikvangst per soort. Elk punt geeft de vangst van één dag weer. De grootte van de punten weerspiegelt de totale vangst per soort. Loess smoothing (span=1) werd gebruikt om een eventuele trend te visualiseren (blauwe lijn). Voor deze smoothing krijgen dagen met een grotere vangst een groter gewicht (lineaire verhouding toekenning gewicht). 95% betrouwbaarheidsintervallen van de loess smoothing zijn weergegeven als een grijze band."}
 reproductie.en.ongemerkt.subset<-reproductie.en.gemerkt[which(reproductie.en.gemerkt$plaats=="Balgerhoeke" &
                                                               reproductie.en.gemerkt$reproductie=="ja" &
                                                               reproductie.en.gemerkt$gemerkt=="n" &
@@ -438,7 +452,7 @@ ggplot(reproductie.en.ongemerkt.subset, aes(x = Datum, y = aandeel)) +
   scale_x_datetime(date_labels = "%d-%m", date_breaks = "15 days")
 ```
 
-```{r fig.height=10, fig.width=10, fig.cap="Aandeel gemerkte vissen met paaikenmerken op totale fuikvangst per soort. Elk punt geeft de vangst van één dag weer. De grootte van de punten weerspiegelt de totale vangst per soort. Loess smoothing (span=1) werd gebruikt om een eventuele trend te visualiseren (blauwe lijn). Voor deze smoothing krijgen dagen met een grotere vangst een groter gewicht (lineaire verhouding toekenning gewicht). 95% betrouwbaarheidsintervallen van de loess smoothing zijn weergegeven als een grijze band."}
+```{r reproductie-gemerkt, fig.height=10, fig.width=10, fig.cap="Aandeel gemerkte vissen met paaikenmerken op totale fuikvangst per soort. Elk punt geeft de vangst van één dag weer. De grootte van de punten weerspiegelt de totale vangst per soort. Loess smoothing (span=1) werd gebruikt om een eventuele trend te visualiseren (blauwe lijn). Voor deze smoothing krijgen dagen met een grotere vangst een groter gewicht (lineaire verhouding toekenning gewicht). 95% betrouwbaarheidsintervallen van de loess smoothing zijn weergegeven als een grijze band."}
 reproductie.en.gemerkt.subset<-reproductie.en.gemerkt[which(reproductie.en.gemerkt$plaats=="Balgerhoeke" &
                                                               reproductie.en.gemerkt$reproductie=="ja" &
                                                               reproductie.en.gemerkt$gemerkt=="j" &
@@ -497,12 +511,12 @@ sd(vis.substraat$Taxon.lengte,na.rm=TRUE)
 
 #### Palinggoot
 
-```{r palinglengtegoot, fig.cap="Lengteverdeling van elvers gevangen met de palinggoot in Balgerhoeke voor de hele studieperiode."}
+```{r palinglengtegoot, fig.cap="Lengteverdeling van elvers gevangen met de palinggoot in Balgerhoeke voor de hele studieperiode (22 maart 2023 - 25 mei 2023)."}
 ggplot(vis.goot, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("Aantal")
 ```
 
-```{r fig.cap="Lengteverdeling van elvers gevangen met de palinggoot in Balgerhoeke voor de drie verschillende maanden van de studieperiode."}
+```{r fig.cap="Lengteverdeling van elvers gevangen met de palinggoot in Balgerhoeke voor de drie verschillende maanden van de studieperiode (22 maart 2023 - 25 mei 2023)."}
 ggplot(vis.goot, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("aantal") +
   facet_wrap(~ maand, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE))
@@ -518,12 +532,12 @@ ggplot(vis.goot %>% group_by(Datum) %>% summarize(aantal=sum(Taxon.aantal)),aes(
 
 #### Substraten
 
-```{r palinglengtesubstraten, fig.cap="Lengteverdeling van elvers gevangen met substraten in Balgerhoeke voor de hele studieperiode."}
+```{r palinglengtesubstraten, fig.cap="Lengteverdeling van elvers gevangen met substraten in Balgerhoeke voor de hele studieperiode (22 maart 2023 - 25 mei 2023)."}
 ggplot(vis.substraat, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("Aantal")
 ```
 
-```{r fig.cap="Lengteverdeling van elvers gevangen met substraten in Balgerhoeke voor de drie verschillende maanden van de studieperiode."}
+```{r fig.cap="Lengteverdeling van elvers gevangen met substraten in Balgerhoeke voor de drie verschillende maanden van de studieperiode (22 maart 2023 - 25 mei 2023)."}
 ggplot(vis.substraat, aes(x = Taxon.lengte, weight = Taxon.aantal)) + 
   geom_histogram() + xlab("Vislengte (mm)") + ylab("Aantal") + 
   facet_wrap(~ maand, scales="free_y",labeller = label_wrap_gen(multi_line=FALSE))
