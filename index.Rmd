@@ -105,7 +105,7 @@ output:
 
 # Dankwoord/voorwoord {.unnumbered}
 
-We willen DVW danken voor de vlotte samenwerking en in het bijzonder X en X om er op toe te zien dat we de gegevens op een veilige manier konden verzamelen. 
+We willen DVW danken voor de vlotte samenwerking en in het bijzonder de mobiele ploeg om er op toe te zien dat we de gegevens op een veilige manier konden verzamelen. Ook een woordje van dank aan de vriendelijke lokale hengelaars die steeds aandachtig toeschouwer waren tijdens het meten en wegen van de visvangst.
 
 # Samenvatting {.unnumbered}
 
