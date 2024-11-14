@@ -26,6 +26,8 @@ library(ape)
 library(dplyr)
 library(sessioninfo)
 library(presenter)
+library(emmeans)
+library(ggpubr)
 
 # package_info(
 #   pkgs = "loaded",
