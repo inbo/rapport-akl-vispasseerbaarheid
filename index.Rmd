@@ -33,7 +33,7 @@ author:
     orcid: "0000-0001-9742-6224"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
   - name:
-      given: "Niko"
+      given: "Nico"
       family: "De Maerteleire"
     email: "nico.demaerteleire@inbo.be"
     orcid: "?"
