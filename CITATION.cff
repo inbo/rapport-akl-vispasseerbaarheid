@@ -1,0 +1,68 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: rapport-akl-vispasseerbaarheid
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Stijn
+    family-names: Bruneel
+    name-particle: Stijn
+    email: stijn.bruneel@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0002-8226-8080'
+  - given-names: David
+    family-names: Buysse
+    email: david.buysse@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0002-4437-5678'
+  - given-names: Lore
+    family-names: Vandamme
+    email: lore.vandamme@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0009-0000-0500-9547'
+  - given-names: Pieterjan
+    family-names: Verhelst
+    email: pieterjan.verhelst@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0002-2610-6941'
+  - given-names: Sarah
+    family-names: Broos
+    email: sarah.broos@inbo.be
+    orcid: 'https://orcid.org/0000-0001-9742-6224'
+    affiliation: Research Institute for Nature and Forest
+  - given-names: Nico
+    family-names: De Maerteleire
+    email: nico.demaerteleire@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0009-0004-9436-8937'
+  - given-names: Simon
+    family-names: Plaetinck
+    email: simon.plaetinck@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0009-0002-5970-1517'
+  - given-names: Diederik
+    family-names: Rosseel
+    email: diederik.rosseel@inbo.be
+    affiliation: Research Institute for Nature and Forest
+  - given-names: Bart
+    family-names: De Pauw
+    email: bart.depauw@inbo.be
+    orcid: 'https://orcid.org/0000-0003-2328-4651'
+    affiliation: Research Institute for Nature and Forest
+  - given-names: Jan
+    family-names: Vanden Houten
+    email: jan.vandenhouten@inbo.be
+    affiliation: Research Institute for Nature and Forest
+  - given-names: Johan
+    family-names: Coeck
+    email: johan.coeck@inbo.be
+    affiliation: Research Institute for Nature and Forest
+    orcid: 'https://orcid.org/0000-0003-2732-7428'
+repository-code: >-
+  https://github.com/stijnbruneel/rapport-akl-vispasseerbaarheid
+abstract: >-
+  De sluisstuwcomplexen in Balgerhoeke en Schipdonk vormen een barrière voor paling, karperachtigen en andere vissoorten. Hier wordt onderzocht in welke mate deze barrières een effect hebben op aanwezige populaties, of vissen kunnen passeren en of voorzieningen voor passage werken.
