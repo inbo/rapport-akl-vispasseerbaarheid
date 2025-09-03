@@ -16,7 +16,7 @@ De sluisstuwcomplexen in Balgerhoeke en Schipdonk vormen een barrière voor pali
 		* f.select.envfit: select environmental covariates in ordination
 		* f.transformation: transform data
 	* not_functions: libraries
-* data
+* data (data is stored on [Zenodo](https://doi.org/10.5281/zenodo.17017617))
 	* abiotiek
 		* extern
 			* coordinaten: coordinaten_waterinfo: coordinates of measuring stations
@@ -27,7 +27,7 @@ De sluisstuwcomplexen in Balgerhoeke en Schipdonk vormen een barrière voor pali
 			* verwerkt_in_excel
 				* data balgerhoeke 2023: corrections made to original data
 				* maximale_vislengtes		
-* media: pictures for report
+* media: pictures for report (media is stored on [Zenodo](https://doi.org/10.5281/zenodo.17017617))
 * output: created pdf's
 * gitignore
 * _bookdown
