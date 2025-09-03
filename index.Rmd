@@ -84,8 +84,14 @@ reviewer:
     email: "kaat.thienpont@inbo.be"
     orcid: "0009-0006-6176-4743"
     affiliation: "Instituut voor Natuur- en Bosonderzoek (INBO)"
+year: 2025
+doi: 10.21436/inbor.132763058
+reportnr: 54
+depotnr: D/2025/3241/315
+cover_photo: coverpic.JPG
+cover_description: Het sluisstuwcomplex van Balgerhoeke op het Afleidingskanaal van de Leie. Foto: David Buysse (INBO)
+embargo: 2025-09-03
 lang: nl
-year: 2024
 style: INBO
 client:
   - De Vlaamse Waterweg
