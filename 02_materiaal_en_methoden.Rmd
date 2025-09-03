@@ -1,3 +1,7 @@
+```{r message=FALSE}
+source("./code/not_functions/download.from.zenodo.R")
+```
+
 # Materiaal en methoden
 
 Vissen ondernemen tijdens de voortplantingsperiode meestal massaal gerichte stroomopwaartse migraties gedurende een korte periode. Als gevolg hiervan kunnen er zich aanzienlijke concentraties van vissen voordoen stroomafwaarts van barrières, wat doorgaans grotere vangsten in de opgestelde fuiken tot gevolg heeft. Om de migraties van alle vissoorten nauwkeurig te bestuderen zou men praktisch wekelijks moeten vissen. In het kader van dit onderzoek is dergelijke arbeidsintensieve aanpak niet aangewezen en werd ervoor gekozen om te focussen op de voortplantingsmigratie van de meest voorkomende karperachtigen in april en mei in het AKL, o.a. blankvoorn, kolblei en brasem en op de stroomopwaartse migratie van jonge paling (glasaal, elvers en gele paling) \@ref(fig:migratieperiode).
