@@ -23,14 +23,14 @@ if (dir.exists("data")==FALSE) {
 
   # --- SECTION 2: DEFINE VARIABLES AND DOWNLOAD DATA ----------------------------
   
-  # # URL for the Zenodo record's API endpoint
-  # api_url <- "https://zenodo.org/api/records/15192025"
-  # # Read the JSON data from the API
-  # record_data <- jsonlite::fromJSON(api_url)
-  # # Extract the files data frame
-  # files_df <- record_data$files
-  # # View the files and their download links
-  # print(files_df)
+  # URL for the Zenodo record's API endpoint
+  api_url <- "https://doi.org/10.5281/zenodo.17017617"
+  # Read the JSON data from the API
+  record_data <- jsonlite::fromJSON(api_url)
+  # Extract the files data frame
+  files_df <- record_data$files
+  # View the files and their download links
+  print(files_df)
   
   # **IMPORTANT**: Replace the placeholder URL with the actual Zenodo download link
   # for your zipped folder. You can find this on the Zenodo record's page.
