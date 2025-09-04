@@ -20,21 +20,28 @@ library(archive)
 library(tidyverse)
 
 if (dir.exists("data")==FALSE) {
-
-  # --- SECTION 2: DEFINE VARIABLES AND DOWNLOAD DATA ----------------------------
   
-  # URL for the Zenodo record's API endpoint
-  api_url <- "https://doi.org/10.5281/zenodo.17017617"
-  # Read the JSON data from the API
-  record_data <- jsonlite::fromJSON(api_url)
-  # Extract the files data frame
-  files_df <- record_data$files
-  # View the files and their download links
-  print(files_df)
+  # --- SECTION 2: GET THE CORRECT DOWNLOAD URL FROM API -------------------------
   
-  # **IMPORTANT**: Replace the placeholder URL with the actual Zenodo download link
-  # for your zipped folder. You can find this on the Zenodo record's page.
-  zenodo_url <- "https://zenodo.org/api/records/15192025/files/stijnbruneel/vfcd-fish-gps-v2.0.0.zip/content"
+  # Zenodo record's API endpoint
+  record_api_url <- "https://zenodo.org/api/records/17017617"
+  
+  # Use a safe way to get the data
+  record_data <- jsonlite::fromJSON(record_api_url)
+  
+  # Find the specific file's download URL
+  file_info <- record_data$files[record_data$files$key == "data and media.zip", ]
+  
+  # Get the URL that contains the space
+  raw_url <- file_info$links$self
+  
+  # URL encode the space character
+  zenodo_url <- URLencode(raw_url)
+  
+  # Print the corrected URL
+  message("Found and corrected URL: ", zenodo_url)
+  
+  # --- SECTION 3: DOWNLOAD AND EXTRACT THE FILE ---------------------------------
   
   # Define the local file path where you want to save the downloaded zip file.
   # You can change this name if you like.
@@ -44,7 +51,7 @@ if (dir.exists("data")==FALSE) {
   # The 'mode = "wb"' is important for binary files like zip archives.
   download.file(zenodo_url, dest_file, mode = "wb")
   
-  # --- SECTION 3: EXTRACT THE FILES ---------------------------------------------
+  # --- SECTION 4: EXTRACT THE FILES ---------------------------------------------
   
   # Define the folder where the contents of the zip file will be extracted.
   # The `dir` argument will create this folder if it doesn't already exist.
@@ -54,23 +61,20 @@ if (dir.exists("data")==FALSE) {
   # This is a robust way to handle various archive formats.
   archive_extract(dest_file, dir = extraction_dir)
   
-  # --- SECTION 4: LOAD THE DATA INTO R ------------------------------------------
-  
   # List the files in the newly created directory to see what was extracted.
   extracted_files <- list.files(extraction_dir)
   print(extracted_files)
   
-  # --- SECTION 5: CLEANUP (OPTIONAL) --------------------------------------------
+  # --- SECTION 6: CLEANUP (OPTIONAL) --------------------------------------------
   
   # If you want to remove the temporary downloaded zip file, you can uncomment
   # the line below. This helps keep your project directory clean.
   file.remove(dest_file)
   
-  # Break the hierarchy of folders to get to the CSV files
+  # --- SECTION 7: BREAK HIERARCHY  ----------------------------------------------
   
   if (dir.exists("zenodo_data")) {
-    extracted_zip <- list.files("zenodo_data", full.names = TRUE)
-    extracted_content <- list.files(extracted_zip, full.names = TRUE)
+    extracted_content <- list.files("zenodo_data", full.names = TRUE)
     for (item in extracted_content) {
       file.rename(from = item, to = basename(item))
     }
