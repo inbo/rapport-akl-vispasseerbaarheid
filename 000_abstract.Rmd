@@ -24,4 +24,6 @@ Technical fish passages are an option if barrier removal is not possible, but th
 
 If neither the removal of the barriers nor the installation of a technical fish passage is possible, an eel ladder is a third option. An eel ladder has lower hydraulic requirements and is therefore likely the simplest solution, but it only works for upstream-migrating young eels. Given the potential of the AKL for upstream eel migration, thanks to the adapted flushing management in Zeebrugge, eel ladders at Balgerhoeke and Schipdonk would be the minimal requirement to make these barriers "eel-passable."
 
+The [data](https://doi.org/10.5281/zenodo.17017617) and code to generate this report are available online.
+
 \eenglish
