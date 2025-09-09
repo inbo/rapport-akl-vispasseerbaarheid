@@ -1,8 +1,8 @@
 ---
 title: "Onderzoek naar vispasseerbaarheid van de sluisstuwcomplexen op het Afleidingskanaal van de Leie in Balgerhoeke en Schipdonk"
-header-includes:
-   - \usepackage{lineno}
-   - \linenumbers
+# header-includes:
+#    - \usepackage{lineno}
+#    - \linenumbers
 author:
   - name:
       given: "Stijn"
