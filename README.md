@@ -27,7 +27,7 @@ De sluisstuwcomplexen in Balgerhoeke en Schipdonk vormen een barrière voor pali
 	* vis
 		* extern
 			* ruw: dataset as provided by data-responsible
-			* verwerkt_in_excel
+			* verwerkt_in_excel: datasets corrected by data-analyst
 				* data balgerhoeke 2023: corrections made to original data
 				* maximale_vislengtes		
 * media: pictures for report (media is stored on [Zenodo](https://doi.org/10.5281/zenodo.17017617))
