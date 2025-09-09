@@ -123,17 +123,17 @@ data %>%
   dplyr::filter(date_utc>as.POSIXct("2023-03-22") & date_utc<as.POSIXct("2023-05-25") & var == "Afvoer") %>%
   summarise('med. debiet (m³/s)' = round(median(value,na.rm=TRUE),digits=2),
             'gem. debiet (m³/s)' = round(mean(value,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 0.1 m³' = round(sum(value<0.1,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 0.25 m³' = round(sum(value<0.25,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 0.5 m³' = round(sum(value<0.5,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 1 m³' = round(sum(value<1,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 2 m³' = round(sum(value<2,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 3 m³' = round(sum(value<3,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 4 m³' = round(sum(value<4,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 5 m³' = round(sum(value<5,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 10 m³' = round(sum(value<10,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 20 m³' = round(sum(value<20,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
-            'Aandeel studieperiode < 30 m³' = round(sum(value<30,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2)) %>%
+            'Aandeel studieperiode < 0.1 m³/s' = round(sum(value<0.1,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 0.25 m³/s' = round(sum(value<0.25,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 0.5 m³/s' = round(sum(value<0.5,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 1 m³/s' = round(sum(value<1,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 2 m³/s' = round(sum(value<2,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 3 m³/s' = round(sum(value<3,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 4 m³/s' = round(sum(value<4,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 5 m³/s' = round(sum(value<5,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 10 m³/s' = round(sum(value<10,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 20 m³/s' = round(sum(value<20,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2),
+            'Aandeel studieperiode < 30 m³/s' = round(sum(value<30,na.rm=TRUE)/sum(value<1000,na.rm=TRUE),digits=2)) %>%
   pivot_summary(loc) %>%
   rename(Debiet = column) %>% kable(caption="Gemiddeld debiet, mediaan debiet en aandeel studieperiode (22 maart 2023 - 25 mei 2023) dat debiet onder een opgegeven waarde lag voor stations te Damme (pand Zeebrugge-Balgerhoeke) en Zomergem (pand Balgerhoeke-Schipdonk).")
 ```

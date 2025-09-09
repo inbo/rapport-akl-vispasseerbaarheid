@@ -88,13 +88,13 @@ year: 2025
 doi: 10.21436/inbor.132763058
 reportnr: 54
 depotnr: D/2025/3241/315
-cover_photo: "coverpic.JPG"
+cover_photo: coverpic
 cover_description: "Het sluisstuwcomplex van Balgerhoeke op het Afleidingskanaal van de Leie. Foto: David Buysse (INBO)"
 embargo: 2025-09-03
 lang: nl
 style: INBO
 client:
-  - De Vlaamse Waterweg
+  - De Vlaamse Waterweg nv
 client_logo: LogoDeVlaamseWaterweg
 floatbarrier: subsubsection
 lof: TRUE
@@ -145,6 +145,8 @@ Bij de sanering van vismigratieknelpunten krijgt het nastreven van een zo natuur
 Technische vispassages zijn een optie wanneer verwijdering van de barrière niet mogelijk is. Deze brengen wel verschillende logistieke uitdagingen met zich mee en blijven een uitdaging voor veel vissen om te passeren. Een De Wit-vispassage laat de passage toe van veel soorten maar vereist wel een minimumdebiet om goed te functioneren en om een voldoende sterke lokstroom te voorzien. In de studieperiode lag het gemiddeld debiet hoger dan de minimumvereiste voor een De Wit-vispassage. Algemeen zal tijdens het voorjaar en najaar wellicht telkens voldoende water voorhanden zijn om een technische vispassage te doen functioneren. Echter, zoals de naam van het AKL al suggereert, speelt het kanaal vooral een rol bij het afleiden of wegvoeren van overtollig water. Huidige debieten zijn daardoor sporadisch en tijdens de zomer mogelijk zelf te laag voor de optimale werking van een vispassage. Een meer continu debiet zou niet alleen de vispassage ten goede komen maar ook de migratie in het pand zelf omwille van het minder gestuwde karakter van het debietverloop. Bovendien zou de meer continue stroming aanleiding geven tot een grotere variatie aan habitats en een algemene toename van de ecologische kwaliteit.
 
 Als noch het verwijderen van de barrières, noch de aanleg van een technische vispassage mogelijk blijkt, is de palinggoot een derde optie. Een palinggoot heeft lagere hydraulische vereisten en is daardoor wellicht de meest eenvoudige oplossing. Deze werkt wel enkel voor stroomopwaarts migrerende jonge paling. Gegeven het potentieel van het AKL voor stroomopwaartse palingmigratie, dankzij het aangepast spuibeheer te Zeebrugge, zouden palinggoten in Balgerhoeke en Schipdonk de minimale vereiste zijn om de barrières "palingpasseerbaar" te maken.
+
+De [data](https://doi.org/10.5281/zenodo.17017617) en code om dit rapport te genereren zijn beschikbaar online.
 
 # Aanbevelingen voor beheer en/of beleid {.unnumbered}
 
