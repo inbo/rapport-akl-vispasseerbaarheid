@@ -28,6 +28,7 @@ library(sessioninfo)
 library(presenter)
 library(emmeans)
 library(ggpubr)
+library(INBOmd)
 
 # package_info(
 #   pkgs = "loaded",
