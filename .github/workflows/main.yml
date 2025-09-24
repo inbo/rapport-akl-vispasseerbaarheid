@@ -30,7 +30,9 @@ jobs:
       - name: Install R packages
         run: |
           install.packages(c("rmarkdown", "knitr", "remotes"))
-          remotes::install_github("inbo/INBOmd")
+          remotes::install_github("inbo/INBOmd", auth_token = Sys.getenv("GITHUB_TOKEN"))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: Rscript {0}
 
       - name: Render R Markdown file
