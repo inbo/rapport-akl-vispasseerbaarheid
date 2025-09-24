@@ -27,7 +27,8 @@ jobs:
 
       - name: Install R packages
         run: |
-          install.packages(c("rmarkdown", "knitr"))
+          install.packages(c("rmarkdown", "knitr", "remotes"))
+          remotes::install_github("inbo/INBOmd")
         shell: Rscript {0}
 
       - name: Render R Markdown file
