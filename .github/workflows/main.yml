@@ -32,13 +32,13 @@ jobs:
 
       - name: Render R Markdown file
         run: |
-          rmarkdown::render("rapport-akl-vispasseerbaarheid.Rmd")
+          rmarkdown::render("index.Rmd")
         shell: Rscript {0}
       
       - name: Copy rendered file to public directory
         run: |
           mkdir docs
-          mv "rapport-akl-vispasseerbaarheid.html" docs/index.html
+          mv "index.html" docs/index.html
 
       - name: Setup Pages
         id: pages
