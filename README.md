@@ -1,4 +1,5 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17211401.svg)](https://doi.org/10.5281/zenodo.17211401)
+[![Website](https://img.shields.io/badge/Website-inbo.github.io/rapport--akl--vispasseerbaarheid-007ec6)](https://inbo.github.io/rapport-akl-vispasseerbaarheid/)
 
 # Rapport Afleidingskanaal van de Leie (AKL) vispasseerbaarheid
 
