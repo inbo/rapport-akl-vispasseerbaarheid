@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17211401.svg)](https://doi.org/10.5281/zenodo.17211401)
+
 # Rapport Afleidingskanaal van de Leie (AKL) vispasseerbaarheid
 
 De sluisstuwcomplexen in Balgerhoeke en Schipdonk vormen een barrière voor paling, karperachtigen en andere vissoorten. Hier wordt onderzocht in welke mate deze barrières een effect hebben op aanwezige populaties, of vissen kunnen passeren en of voorzieningen voor passage zouden kunnen werken. 
