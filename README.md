@@ -1,6 +1,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17211401.svg)](https://doi.org/10.5281/zenodo.17211401)
 [![Website](https://img.shields.io/badge/Website-inbo.github.io/rapport--akl--vispasseerbaarheid-007ec6)](https://inbo.github.io/rapport-akl-vispasseerbaarheid/)
 [![Report](https://img.shields.io/badge/Report-View%20Publication-2a9d8f)](https://pureportal.inbo.be/nl/publications/onderzoek-naar-vispasseerbaarheid-van-de-sluisstuwcomplexen-op-he)
+[![Data](https://img.shields.io/badge/Data-10.5281/zenodo.17211401-4398c7.svg)](https://doi.org/10.5281/zenodo.17211401)
 
 # Rapport Afleidingskanaal van de Leie (AKL) vispasseerbaarheid
 
